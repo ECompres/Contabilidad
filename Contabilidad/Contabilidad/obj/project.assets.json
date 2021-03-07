@@ -7548,9 +7548,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Emmanuel\\Desktop\\Proyectos\\C#\\Contabilidad\\Contabilidad\\Contabilidad\\Contabilidad.csproj",
-      "projectName": "Contabilidad",
-      "projectPath": "C:\\Users\\Emmanuel\\Desktop\\Proyectos\\C#\\Contabilidad\\Contabilidad\\Contabilidad\\Contabilidad.csproj",
+      "projectUniqueName": "C:\\Users\\Emmanuel\\Desktop\\Proyectos\\C#\\Contabilidad\\Contabilidad\\Contabilidad\\Accounting.csproj",
+      "projectName": "Accounting",
+      "projectPath": "C:\\Users\\Emmanuel\\Desktop\\Proyectos\\C#\\Contabilidad\\Contabilidad\\Contabilidad\\Accounting.csproj",
       "packagesPath": "C:\\Users\\Emmanuel\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Emmanuel\\Desktop\\Proyectos\\C#\\Contabilidad\\Contabilidad\\Contabilidad\\obj\\",
       "projectStyle": "PackageReference",
