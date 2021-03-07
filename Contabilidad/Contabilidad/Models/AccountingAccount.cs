@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Contabilidad.Models
 {
-    public class AccountingAccounts
+    public class AccountingAccount
     {
         public int ID { get; set; }
         public string Description { get; set; }

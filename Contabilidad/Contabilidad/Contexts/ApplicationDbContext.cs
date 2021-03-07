@@ -14,7 +14,7 @@ namespace Contabilidad.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new AccountingAccountsConfiguration());
+            modelBuilder.ApplyConfiguration(new AccountingAccountConfiguration());
             modelBuilder.ApplyConfiguration(new AccountingEntryConfiguration());
             modelBuilder.ApplyConfiguration(new AccountTypeConfiguration());
             modelBuilder.ApplyConfiguration(new AuxiliarSystemConfiguration());
@@ -22,7 +22,7 @@ namespace Contabilidad.Contexts
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<AccountingAccounts> AccountingAccounts { get; set; }
+        public DbSet<AccountingAccount> AccountingAccount { get; set; }
         public DbSet<AccountingEntry> AccountingEntry { get; set; }
         public DbSet<AccountType> AccountType { get; set; }
         public DbSet<AuxiliarSystem> AuxiliarSystem { get; set; }

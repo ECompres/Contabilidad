@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Contabilidad.Configurations
 {
-    public class AccountingAccountsConfiguration : IEntityTypeConfiguration<AccountingAccounts>
+    public class AccountingAccountConfiguration : IEntityTypeConfiguration<AccountingAccount>
     {
-        public void Configure(EntityTypeBuilder<AccountingAccounts> builder) 
+        public void Configure(EntityTypeBuilder<AccountingAccount> builder) 
         {
-            builder.ToTable("AccountingAccounts");
+            builder.ToTable("AccountingAccount");
             
             builder.HasKey(a => a.ID);
         }

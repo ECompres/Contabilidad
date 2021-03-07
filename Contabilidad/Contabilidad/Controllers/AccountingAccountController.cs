@@ -10,27 +10,27 @@ using System.Threading.Tasks;
 
 namespace Contabilidad.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/accountingAccount")]
     [ApiController]
-    public class AccountingAccountsController : ControllerBase
+    public class AccountingAccountController : ControllerBase
     {
         private readonly ApplicationDbContext context;
 
-        public AccountingAccountsController(ApplicationDbContext _context)
+        public AccountingAccountController(ApplicationDbContext _context)
         {
             context = _context;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AccountingAccounts>>> GetAll()
+        public async Task<ActionResult<IEnumerable<AccountingAccount>>> GetAll()
         {
-            return await context.AccountingAccounts.ToListAsync();
+            return await context.AccountingAccount.Include(x=>x.AccountType).ToListAsync();
         }
         
         [HttpGet("{id}", Name ="GetAccountingAccount")]
-        public async Task<ActionResult<AccountingAccounts>> Get(int id)
+        public async Task<ActionResult<AccountingAccount>> Get(int id)
         {
-            var accountingAccount = await context.AccountingAccounts.FirstOrDefaultAsync(x => x.ID == id);
+            var accountingAccount = await context.AccountingAccount.FirstOrDefaultAsync(x => x.ID == id);
             if(accountingAccount == null)
             {
                 return NotFound("The Account doesn't exists");
@@ -39,7 +39,7 @@ namespace Contabilidad.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] AccountingAccounts accountingAccount)
+        public async Task<ActionResult> Post([FromBody] AccountingAccount accountingAccount)
         {
             if (ModelState.IsValid)
             {
@@ -51,15 +51,28 @@ namespace Contabilidad.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] AccountingAccounts accountingAccount)
+        public async Task<ActionResult> Put(int id, [FromBody] AccountingAccount accountingAccount)
         {
             if (id == accountingAccount.ID)
             {
                 context.Entry(accountingAccount).State = EntityState.Modified;
                 await context.SaveChangesAsync();
-                return Ok();
+                return Ok("Accounting Account modified");
             }
             return BadRequest("ID doesn't match");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var accountingAccount = await context.AccountingAccount.FirstOrDefaultAsync(x => x.ID == id);
+            if(accountingAccount == null)
+            {
+                return NotFound("Accounting Account doesn't exist");
+            }
+            context.AccountingAccount.Remove(accountingAccount);
+            await context.SaveChangesAsync();
+            return Ok(accountingAccount);    
         }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Contabilidad.Migrations
+namespace Accounting.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -40,7 +40,7 @@ namespace Contabilidad.Migrations
                     b.ToTable("AccountType");
                 });
 
-            modelBuilder.Entity("Contabilidad.Models.AccountingAccounts", b =>
+            modelBuilder.Entity("Contabilidad.Models.AccountingAccount", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -72,7 +72,7 @@ namespace Contabilidad.Migrations
 
                     b.HasIndex("IdAccountType");
 
-                    b.ToTable("AccountingAccounts");
+                    b.ToTable("AccountingAccount");
                 });
 
             modelBuilder.Entity("Contabilidad.Models.AccountingEntry", b =>
@@ -149,7 +149,7 @@ namespace Contabilidad.Migrations
                     b.ToTable("CurrencyType");
                 });
 
-            modelBuilder.Entity("Contabilidad.Models.AccountingAccounts", b =>
+            modelBuilder.Entity("Contabilidad.Models.AccountingAccount", b =>
                 {
                     b.HasOne("Contabilidad.Models.AccountType", "AccountType")
                         .WithMany("AccountingAccounts")

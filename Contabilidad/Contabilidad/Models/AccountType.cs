@@ -11,6 +11,6 @@ namespace Contabilidad.Models
         public string Description { get; set; }
         public string Origin { get; set; }
         public bool Status { get; set; }
-        public List<AccountingAccounts> AccountingAccounts { get; set; }
+        public List<AccountingAccount> AccountingAccounts { get; set; }
     }
 }

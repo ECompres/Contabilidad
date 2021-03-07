@@ -1,4 +1,4 @@
-using Contabilidad.Contexts;
+    using Contabilidad.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,6 +33,10 @@ namespace Contabilidad
             services.AddDbContext<ApplicationDbContext>
                     (options => options
                                 .UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+            services.AddControllersWithViews()
+                    .AddNewtonsoftJson
+                    (options =>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Contabilidad", Version = "v1" });

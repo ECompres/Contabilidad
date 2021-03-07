@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Contabilidad.Migrations
+namespace Accounting.Migrations
 {
     public partial class InitialMigration : Migration
     {
@@ -52,7 +52,7 @@ namespace Contabilidad.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AccountingAccounts",
+                name: "AccountingAccount",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -67,9 +67,9 @@ namespace Contabilidad.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AccountingAccounts", x => x.ID);
+                    table.PrimaryKey("PK_AccountingAccount", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_AccountingAccounts_AccountType_IdAccountType",
+                        name: "FK_AccountingAccount_AccountType_IdAccountType",
                         column: x => x.IdAccountType,
                         principalTable: "AccountType",
                         principalColumn: "ID",
@@ -102,8 +102,8 @@ namespace Contabilidad.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AccountingAccounts_IdAccountType",
-                table: "AccountingAccounts",
+                name: "IX_AccountingAccount_IdAccountType",
+                table: "AccountingAccount",
                 column: "IdAccountType");
 
             migrationBuilder.CreateIndex(
@@ -115,7 +115,7 @@ namespace Contabilidad.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AccountingAccounts");
+                name: "AccountingAccount");
 
             migrationBuilder.DropTable(
                 name: "AccountingEntry");
