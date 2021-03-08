@@ -58,7 +58,7 @@ namespace Contabilidad.Controllers
             {
                 context.Entry(currencyType).State = EntityState.Modified;
                 await context.SaveChangesAsync();
-                return Ok("Currency Type modified");
+                return Ok(currencyType);
             }
             return NotFound("Id doesn't match");
         }

@@ -58,7 +58,7 @@ namespace Contabilidad.Controllers
             {
                 context.Entry(auxiliarSystem).State = EntityState.Modified;
                 await context.SaveChangesAsync();
-                return Ok("Auxiliar System modified");
+                return Ok(auxiliarSystem);
             }
             return NotFound("Id doesn't match");
         }
