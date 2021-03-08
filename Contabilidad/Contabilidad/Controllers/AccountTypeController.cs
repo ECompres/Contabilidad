@@ -24,7 +24,7 @@ namespace Contabilidad.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AccountType>>> GetAll()
         {
-            return await context.AccountType.Include(x=>x.AccountingAccounts).ToListAsync();
+            return await context.AccountType.Include(x => x.AccountingAccounts).ToListAsync();
         }
 
         [HttpGet("{id}", Name = "GetAccountType")]
@@ -54,11 +54,11 @@ namespace Contabilidad.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, [FromBody] AccountType accountType)
         {
-            if(id == accountType.ID)
+            if (id == accountType.ID)
             {
                 context.Entry(accountType).State = EntityState.Modified;
                 await context.SaveChangesAsync();
-                return Ok("Account Type modified");
+                return Ok(accountType);
             }
             return NotFound("Id doesn't match");
         }
@@ -67,7 +67,7 @@ namespace Contabilidad.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var accountType = await context.AccountType.FirstOrDefaultAsync(x => x.ID == id);
-            if(accountType == null)
+            if (accountType == null)
             {
                 return NotFound("Account Type doesn't exists");
             }
