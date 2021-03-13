@@ -24,14 +24,14 @@ namespace Contabilidad.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AccountingAccount>>> GetAll()
         {
-            return await context.AccountingAccount.Include(x=>x.AccountType).ToListAsync();
+            return await context.AccountingAccount.Include(x => x.AccountType).ToListAsync();
         }
-        
-        [HttpGet("{id}", Name ="GetAccountingAccount")]
+
+        [HttpGet("{id}", Name = "GetAccountingAccount")]
         public async Task<ActionResult<AccountingAccount>> Get(int id)
         {
             var accountingAccount = await context.AccountingAccount.FirstOrDefaultAsync(x => x.ID == id);
-            if(accountingAccount == null)
+            if (accountingAccount == null)
             {
                 return NotFound("The Account doesn't exists");
             }
@@ -57,7 +57,7 @@ namespace Contabilidad.Controllers
             {
                 context.Entry(accountingAccount).State = EntityState.Modified;
                 await context.SaveChangesAsync();
-                return Ok("Accounting Account modified");
+                return Ok(accountingAccount);
             }
             return BadRequest("ID doesn't match");
         }
@@ -66,13 +66,13 @@ namespace Contabilidad.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var accountingAccount = await context.AccountingAccount.FirstOrDefaultAsync(x => x.ID == id);
-            if(accountingAccount == null)
+            if (accountingAccount == null)
             {
                 return NotFound("Accounting Account doesn't exist");
             }
             context.AccountingAccount.Remove(accountingAccount);
             await context.SaveChangesAsync();
-            return Ok(accountingAccount);    
+            return Ok(accountingAccount);
         }
     }
 }

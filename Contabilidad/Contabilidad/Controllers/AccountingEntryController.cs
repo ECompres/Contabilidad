@@ -22,21 +22,22 @@ namespace Contabilidad.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AccountingEntry>>> GetAll() {
-            return await context.AccountingEntry.ToListAsync();
+        public async Task<ActionResult<IEnumerable<AccountingEntry>>> GetAll()
+        {
+            return await context.AccountingEntry.Include(a => a.AuxiliarSystem).ToListAsync();
         }
 
-        [HttpGet("{id}", Name ="GetAccountingEntry")]
+        [HttpGet("{id}", Name = "GetAccountingEntry")]
         public async Task<ActionResult<AccountingEntry>> Get(int id)
         {
             var accountingEntry = await context.AccountingEntry.FirstOrDefaultAsync(x => x.ID == id);
-            if(accountingEntry == null)
+            if (accountingEntry == null)
             {
                 return NotFound("Accounting Entry doesn't exist");
             }
             return Ok(accountingEntry);
         }
-        
+
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] AccountingEntry accountingEntry)
         {
@@ -44,7 +45,7 @@ namespace Contabilidad.Controllers
             {
                 context.AccountingEntry.Add(accountingEntry);
                 await context.SaveChangesAsync();
-                return new CreatedAtRouteResult("GetAccountingEntry", new { id =accountingEntry.ID}, accountingEntry);
+                return new CreatedAtRouteResult("GetAccountingEntry", new { id = accountingEntry.ID }, accountingEntry);
             }
             return BadRequest();
         }
@@ -52,11 +53,11 @@ namespace Contabilidad.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, [FromBody] AccountingEntry accountingEntry)
         {
-            if(id == accountingEntry.ID)
+            if (id == accountingEntry.ID)
             {
                 context.Entry(accountingEntry).State = EntityState.Modified;
                 await context.SaveChangesAsync();
-                return Ok("Accounting Entry modified");
+                return Ok(accountingEntry);
             }
             return NotFound("ID doesn't match");
         }
