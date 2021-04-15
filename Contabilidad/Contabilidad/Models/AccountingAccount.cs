@@ -13,7 +13,7 @@ namespace Contabilidad.Models
         public AccountType AccountType { get; set; }
         public bool TransactionsEnabled { get; set; }
         public int Level { get; set; }
-        public string MajorAccount { get; set; } //No sé si el tipo de dato es correcto
+        public int MajorAccount { get; set; }
         public double Balance { get; set; }
         public bool Status { get; set; }
     }

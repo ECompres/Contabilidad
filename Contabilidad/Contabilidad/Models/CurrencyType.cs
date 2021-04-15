@@ -9,7 +9,7 @@ namespace Contabilidad.Models
     {
         public int ID { get; set; }
         public string Description { get; set; }
-        public string LastExchangeRate { get; set; } //No sé si el tipo de dato es correcto
+        public double LastExchangeRate { get; set; } //No sé si el tipo de dato es correcto
         public bool Status { get; set; }
     }
 }

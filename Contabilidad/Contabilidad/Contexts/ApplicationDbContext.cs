@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Accounting;
 
 namespace Contabilidad.Contexts
 {
@@ -19,6 +20,7 @@ namespace Contabilidad.Contexts
             modelBuilder.ApplyConfiguration(new AccountTypeConfiguration());
             modelBuilder.ApplyConfiguration(new AuxiliarSystemConfiguration());
             modelBuilder.ApplyConfiguration(new CurrencyTypeConfiguration());
+            modelBuilder.Seed();
             base.OnModelCreating(modelBuilder);
         }
 
