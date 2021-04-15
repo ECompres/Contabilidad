@@ -1,4 +1,5 @@
-﻿using Contabilidad.Contexts;
+﻿using Accounting.Models;
+using Contabilidad.Contexts;
 using Contabilidad.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,13 +25,13 @@ namespace Contabilidad.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AccountingEntry>>> GetAll()
         {
-            return await context.AccountingEntry.Include(a => a.AuxiliarSystem).ToListAsync();
+            return await context.AccountingEntry.Include(a => a.AuxiliarSystem).Include(a => a.Accounts).ToListAsync();
         }
 
         [HttpGet("{id}", Name = "GetAccountingEntry")]
         public async Task<ActionResult<AccountingEntry>> Get(int id)
         {
-            var accountingEntry = await context.AccountingEntry.FirstOrDefaultAsync(x => x.ID == id);
+            var accountingEntry = await context.AccountingEntry.Include(a => a.Accounts).FirstOrDefaultAsync(x => x.ID == id);
             if (accountingEntry == null)
             {
                 return NotFound("Accounting Entry doesn't exist");
@@ -55,8 +56,16 @@ namespace Contabilidad.Controllers
         {
             if (id == accountingEntry.ID)
             {
-                context.Entry(accountingEntry).State = EntityState.Modified;
+                var accountEntry = await context.AccountingEntry.Include(a => a.Accounts).FirstOrDefaultAsync(a => a.ID == id);
+                accountEntry.Accounts = new List<Account>();
                 await context.SaveChangesAsync();
+                accountEntry.Accounts = accountingEntry.Accounts;
+                accountEntry.Description = accountingEntry.Description;
+                accountEntry.EntryDate = accountingEntry.EntryDate;
+                accountEntry.IdAuxiliarSystem = accountingEntry.IdAuxiliarSystem;
+                accountEntry.MovementType = accountingEntry.MovementType;
+                await context.SaveChangesAsync();
+
                 return Ok(accountingEntry);
             }
             return NotFound("ID doesn't match");

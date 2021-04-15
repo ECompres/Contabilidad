@@ -1,11 +1,8 @@
 ﻿using Contabilidad.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Contabilidad.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Accounting;
+using Accounting.Configurations;
 
 namespace Contabilidad.Contexts
 {
@@ -20,6 +17,9 @@ namespace Contabilidad.Contexts
             modelBuilder.ApplyConfiguration(new AccountTypeConfiguration());
             modelBuilder.ApplyConfiguration(new AuxiliarSystemConfiguration());
             modelBuilder.ApplyConfiguration(new CurrencyTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new AccountConfiguration());
+
+
             modelBuilder.Seed();
             base.OnModelCreating(modelBuilder);
         }

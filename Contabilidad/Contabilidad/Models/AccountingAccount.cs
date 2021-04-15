@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Accounting.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,5 +17,8 @@ namespace Contabilidad.Models
         public int MajorAccount { get; set; }
         public double Balance { get; set; }
         public bool Status { get; set; }
+
+        public ICollection<Account> Accounts { get; set; }
+
     }
 }
