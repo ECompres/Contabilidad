@@ -38,6 +38,12 @@ namespace Contabilidad.Controllers
             return Ok(accountingEntry);
         }
 
+        [HttpGet("auxiliars/{id}")]
+        public async Task<ActionResult<IEnumerable<AccountingEntry>>> GetByAuxiliars(int id)
+        {
+            return await context.AccountingEntry.Where(x => x.IdAuxiliarSystem == id).ToListAsync();
+        }
+
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] AccountingEntry accountingEntry)
         {
